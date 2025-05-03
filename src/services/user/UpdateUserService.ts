@@ -1,35 +1,35 @@
 import prismaClient from "../../prisma";
 
-interface UserRequest{
+interface UserRequest {
     user_id: string;
     name: string;
     endereco: string;
 }
 
-class UpdateUserService{
-    async execute({ user_id, name, endereco }){
+class UpdateUserService {
+    async execute({ user_id, name, endereco }) {
 
         try {
-            
+
             const userAlreadyExists = await prismaClient.user.findFirst({
-                where:{
+                where: {
                     id: user_id,
                 }
             })
 
-            if(!userAlreadyExists){
+            if (!userAlreadyExists) {
                 throw new Error("Usuário inválido");
             }
 
             const userUpdated = await prismaClient.user.update({
-                where:{
+                where: {
                     id: user_id
                 },
-                data:{
+                data: {
                     name,
                     endereco,
                 },
-                select:{
+                select: {
                     name: true,
                     email: true,
                     endereco: true,
