@@ -10,6 +10,7 @@ import { CheckSubscriptionController } from './controllers/haircut/CheckSubscrip
 import { CountHaircutsController } from './controllers/haircut/CountHaircutsController';
 import { DetailHaircutController } from './controllers/haircut/DetailHaircutController';
 import { NewScheduleController } from './controllers/schedule/NewScheduleController';
+import { ListScheduleController } from './controllers/schedule/ListScheduleController';
 
 import { isAuthenticated } from './middlewares/isAuthenticated';
 
@@ -31,5 +32,6 @@ router.get('/haircut/detail', isAuthenticated, new DetailHaircutController().han
 
 // --- ROTA SCHEDULE / SERVIÇOS ---
 router.post('/schedule', isAuthenticated, new NewScheduleController().handle)
+router.get('/schedule', isAuthenticated, new ListScheduleController().handle)
 
 export { router };
